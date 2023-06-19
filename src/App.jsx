@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { Canvas, useFrame } from 'react-three-fiber';
-import * as THREE from 'three';
 import './App.css';
 
 const FurnitureConfigurator = () => {
@@ -22,6 +21,12 @@ const FurnitureConfigurator = () => {
     if (selectedFurniture && selectedColor) {
       setResult(`Вы выбрали ${selectedFurniture} с цветом ${selectedColor}`);
     }
+  };
+
+  const handleReset = () => {
+    setSelectedFurniture(null);
+    setSelectedColor(null);
+    setResult(null);
   };
 
   return (
@@ -82,6 +87,11 @@ const FurnitureConfigurator = () => {
           {selectedFurniture === 'Стол' && <Table color={selectedColor} />}
         </Canvas>
       </div>
+      {selectedFurniture || selectedColor || result ? (
+        <button onClick={handleReset} className="reset-button">
+          Сбросить
+        </button>
+      ) : null}
     </div>
   );
 };
